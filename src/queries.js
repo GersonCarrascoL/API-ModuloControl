@@ -12,8 +12,8 @@ function SelectCollection(req, res, next, whereIN){
         "THEN alumno_programa.dni_m " +
         "ELSE alumno.dni " +
     "END AS dni, " +
-    
-    "concepto.concepto as Concepto, " +
+    "concepto.concepto as concepto, " +
+    "recaudaciones.numero as recibo, " + 
     "recaudaciones.importe, " +
     "recaudaciones.fecha, " +
     "recaudaciones.id_ubicacion, " + 
