@@ -135,24 +135,22 @@ function getComplet (req, res, next) {
             whereperiod = "("+indice_fecha+" < '"+FPeriod.toDateString()+"' AND " + indice_fecha + " >= "+ IPeriod +" "+")";
         }else
             whereperiod = "("+indice_fecha+" BETWEEN to_date("+IPeriod+",'YYYY-MM-DD') AND to_date("+FPeriod+",'YYYY-MM-DD'))";
-            // whereperiod = "("+indice_fecha+">="+IPeriod+"::date AND " + indice_fecha +"<"+FPeriod+"::date)";
     }
 
-    let where = "";
-    console.log(whereperiod)
-    if( whereperiod){
-        console.log('kasdasdas1222222')
-        where = where_construct(ListNames, indice_name)+" AND "
-            +where_construct(Listvoucher, indice_voucher)+" AND "
-            +where_construct(ListConcepts, indice_concepto)+" AND "
-            +"("+where_construct(ListDNI,indice_dni)+" OR "+where_construct(ListDNI, indice_dnim)+") AND "
-            +"("+where_construct(ListCodigo,indice_codigo)+" OR "+where_construct(ListCodigo, indice_codigom)+")"
-            " AND clase_pagos.id_clase_pagos IN (select id_clase_pagos from configuracion where estado = 'S') ";
-    }else if(whereperiod == false ){
-        console.log('kasdasdas122222211111111')
-        where = whereperiod +
+    // if( whereperiod){
+    //     console.log('kasdasdas1222222')
+    let where = where_construct(ListNames, indice_name)+" AND "
+        +whereperiod+" AND "
+        +where_construct(Listvoucher, indice_voucher)+" AND "
+        +where_construct(ListConcepts, indice_concepto)+" AND "
+        +"("+where_construct(ListDNI,indice_dni)+" OR "+where_construct(ListDNI, indice_dnim)+") AND "
+        +"("+where_construct(ListCodigo,indice_codigo)+" OR "+where_construct(ListCodigo, indice_codigom)+")"
         " AND clase_pagos.id_clase_pagos IN (select id_clase_pagos from configuracion where estado = 'S') ";
-    }
+    // }else if(whereperiod == false ){
+    //     console.log('kasdasdas122222211111111')
+    //     where = whereperiod +
+    //     " AND clase_pagos.id_clase_pagos IN (select id_clase_pagos from configuracion where estado = 'S') ";
+    // }
     
     console.log(where)
     q.SelectCollection(req, res, next, where);
