@@ -35,10 +35,8 @@ function SelectCollection(req, res, next, whereIN){
         where +
     " ORDER BY alumno.codigo DESC, fecha DESC; "
 
-    // console.log(query);
     db.any(query)
         .then(function(data){
-            console.log(data)
             res.status(200)
                 .json({
                     status : 'success',

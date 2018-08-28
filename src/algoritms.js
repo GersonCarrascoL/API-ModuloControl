@@ -100,7 +100,7 @@ function where_construct(ListValor, indice){
             valorcomillas=valorcomillas+"'"+valores[i]+"',";
         valorcomillas = valorcomillas.slice(0,-1);
         
-        where = where + indice+" IN ("+valorcomillas+")";
+        where = where + indice+" = "+valorcomillas+"";
         console.log(where)
     }else
         where = 'true';
@@ -124,7 +124,7 @@ function getComplet (req, res, next) {
     if (ListConcepts === "") ListConcepts = null;
     if (Listvoucher === "") Listvoucher = null;
     if (ListDNI === "") ListDNI = null;
-    if (ListCodigo === "") ListCodigo == null;
+    if (ListCodigo === "") ListCodigo = null;
     if (jsonR.periodoI === null ||jsonR.periodoI === "") IPeriod = "'0001-01-01'";
     if (jsonR.periodoF === null ||jsonR.periodoF === "") FPeriod = "'"+hoy.getFullYear()+'-'+hoy.getMonth()+'-'+hoy.getDate()+"'";
     if ((jsonR.periodoI === null ||jsonR.periodoI === "") && (jsonR.periodoF === null ||jsonR.periodoF === ""))
@@ -137,17 +137,19 @@ function getComplet (req, res, next) {
             whereperiod = "("+indice_fecha+" BETWEEN to_date("+IPeriod+",'YYYY-MM-DD') AND to_date("+FPeriod+",'YYYY-MM-DD'))";
             // whereperiod = "("+indice_fecha+">="+IPeriod+"::date AND " + indice_fecha +"<"+FPeriod+"::date)";
     }
-    
+
     let where = "";
     console.log(whereperiod)
-    if( whereperiod === true){
+    if( whereperiod){
+        console.log('kasdasdas1222222')
         where = where_construct(ListNames, indice_name)+" AND "
             +where_construct(Listvoucher, indice_voucher)+" AND "
             +where_construct(ListConcepts, indice_concepto)+" AND "
             +"("+where_construct(ListDNI,indice_dni)+" OR "+where_construct(ListDNI, indice_dnim)+") AND "
-            +"("+where_construct(ListCodigo,indice_codigo)+" OR "+where_construct(ListCodigo, indice_codigom)+") AND "
+            +"("+where_construct(ListCodigo,indice_codigo)+" OR "+where_construct(ListCodigo, indice_codigom)+")"
             " AND clase_pagos.id_clase_pagos IN (select id_clase_pagos from configuracion where estado = 'S') ";
-    }else{
+    }else if(whereperiod == false ){
+        console.log('kasdasdas122222211111111')
         where = whereperiod +
         " AND clase_pagos.id_clase_pagos IN (select id_clase_pagos from configuracion where estado = 'S') ";
     }
