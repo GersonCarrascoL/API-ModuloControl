@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
 router.get('/recaudaciones', algrmts.getAll);
 
 /*  POST Recaudacion detallada*/
-router.post('/recaudaciones/detallada/', algrmts.getComplet);
+router.post('/recaudaciones/detallada', algrmts.getComplet);
 
 /*  POST Editar Recaudacion*/
 router.post('/recaudaciones/id/', algrmts.validate);
