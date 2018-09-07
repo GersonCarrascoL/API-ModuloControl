@@ -1,5 +1,6 @@
 let cn = require('../src/dbconnection');
 let db = cn.connection;
+const numeral = require('numeral');
 
 function SelectCollection(req, res, next, whereIN){
     let where = "WHERE "+whereIN;
@@ -41,6 +42,10 @@ function SelectCollection(req, res, next, whereIN){
 
     db.any(query)
         .then(function(data){
+            data.forEach(element => {
+                element.importe = 'S/.'+numeral(element.importe).format('0,0.00');
+            });
+            
             res.status(200)
                 .json({
                     status : 'success',
