@@ -18,6 +18,7 @@ function SelectCollection(req, res, next, whereIN){
     "recaudaciones.importe, " +
     "recaudaciones.fecha, " +
     "recaudaciones.id_ubicacion, " + 
+    "recaudaciones.observacion_upg, " +
     "ubicacion.descripcion as ubicacion, "+
     "tipo.descripcion as tipo, "+
     "CASE " +
