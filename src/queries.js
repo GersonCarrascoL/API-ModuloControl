@@ -101,6 +101,7 @@ function UpdateQuery(req, res, next, when1, when2, when3, indices) {
         ${when1}, ${ind.i_obs} = CASE ${ind.i_recaudacion} ${when2},
         ${ind.i_ubic} = CASE ${ind.i_recaudacion} ${when3}
          WHERE ${ind.i_recaudacion} IN (${indices})`;
+    console.log(query);
     db.any(query)
         .then(function(data){
             res.status(200)
