@@ -112,6 +112,7 @@ function UpdateQuery(req, res, next, when1, when2, when3, indices) {
                 });
         })
         .catch(function (err) {
+            console.log(err);
             return next(err);
         })
 }
