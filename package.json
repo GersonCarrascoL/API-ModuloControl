@@ -15,7 +15,8 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
     "numeral": "^2.0.6",
-    "pg-promise": "^8.2.2"
+    "pg-promise": "^8.2.2",
+    "nodemon": "^1.17.5"
   },
   "devDependencies": {
     "nodemon": "^1.17.5"
