@@ -137,8 +137,6 @@ function getComplet (req, res, next) {
             whereperiod = "("+indice_fecha+" BETWEEN to_date("+IPeriod+",'YYYY-MM-DD') AND to_date("+FPeriod+",'YYYY-MM-DD'))";
     }
 
-    // if( whereperiod){
-    //     console.log('kasdasdas1222222')
     let where = where_construct(ListNames, indice_name)+" AND "
         +whereperiod+" AND "
         +where_construct(Listvoucher, indice_voucher)+" AND "
@@ -146,11 +144,6 @@ function getComplet (req, res, next) {
         +"("+where_construct(ListDNI,indice_dni)+" OR "+where_construct(ListDNI, indice_dnim)+") AND "
         +"("+where_construct(ListCodigo,indice_codigo)+" OR "+where_construct(ListCodigo, indice_codigom)+")"
         " AND clase_pagos.id_clase_pagos IN (select id_clase_pagos from configuracion where estado = 'S') ";
-    // }else if(whereperiod == false ){
-    //     console.log('kasdasdas122222211111111')
-    //     where = whereperiod +
-    //     " AND clase_pagos.id_clase_pagos IN (select id_clase_pagos from configuracion where estado = 'S') ";
-    // }
     
     console.log(where)
     q.SelectCollection(req, res, next, where);
@@ -177,6 +170,11 @@ function validate(req, res, next){
         q.UpdateQuery(req,res,next,v , v2, v3,indices);
     }
 }
+function updateObservation(req,res,next){
+    let idrecaudation = "'"+req.body.idrecaudacion+"'",
+        recaudation_message = "'"+req.body.mensaje+"'";
+    q.UpdateObservation(req,res,next,idrecaudation,recaudation_message)
+}
 function insertNewCollection(req, res, next){
     let jsonR = req.body;
      let va = "('"+jsonR.id_alum+"',"+
@@ -202,6 +200,7 @@ module.exports = {
     getAll: getAll,
     getComplet:getComplet,
     validate: validate,
+    updateObservation:updateObservation,
     insertNewCollection:insertNewCollection,
     getAllConcepts: getAllConcepts,
     getAllTypes:getAllTypes,

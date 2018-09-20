@@ -15,6 +15,7 @@ function SelectCollection(req, res, next, whereIN){
     "END AS dni, " +
     "concepto.concepto as concepto, " +
     "recaudaciones.numero as recibo, " + 
+    "recaudaciones.id_rec as idrecaudacion, " +
     "recaudaciones.importe, " +
     "recaudaciones.fecha, " +
     "recaudaciones.id_ubicacion, " + 
@@ -77,6 +78,23 @@ function SelectGeneral(req, res, next, table){
             return next(err);
         })
 }
+function UpdateObservation(req,res,next,id,message){
+    let query = 'UPDATE public.recaudaciones SET'+
+        ' observacion_upg='+message+
+        ' WHERE id_rec='+id+';';
+    console.log(query)
+    db.any(query)
+        .then(()=>{
+            res.status(200)
+                .json({
+                    status : 'success',
+                    message : 'Update success'
+                })
+        })
+        .catch(err=>{
+            return next(err);
+        })
+}
 function UpdateQuery(req, res, next, when1, when2, when3, indices) {
     let ind = require('../src/algoritms');
     let query =`UPDATE recaudaciones SET ${ind.i_flag} = CASE ${ind.i_recaudacion} 
@@ -119,6 +137,7 @@ function InsertQuery(req, res, next, valores){
 module.exports = {
     SelectGeneral:SelectGeneral,
     SelectCollection:SelectCollection,
+    UpdateObservation:UpdateObservation,
     UpdateQuery:UpdateQuery,
     InsertQuery:InsertQuery
 };
