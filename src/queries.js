@@ -15,7 +15,7 @@ function SelectCollection(req, res, next, whereIN){
     "END AS dni, " +
     "concepto.concepto as concepto, " +
     "recaudaciones.numero as recibo, " + 
-    "recaudaciones.id_rec as idrecaudacion, " +
+    "recaudaciones.id_rec, " +
     "recaudaciones.importe, " +
     "recaudaciones.fecha, " +
     "recaudaciones.id_ubicacion, " + 
