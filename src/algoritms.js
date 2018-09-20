@@ -154,7 +154,8 @@ function validate(req, res, next){
     let check="";
     let obs="";
     let ubic ="";
-    for (let i in jsonR){
+    console.log(jsonR);
+    for (let i in jsonR){        
         if (jsonR.hasOwnProperty(i)) {
             indices = indices +','+jsonR[i].id_rec;
             check = check+'¬'+jsonR[i].check;
@@ -162,7 +163,9 @@ function validate(req, res, next){
             ubic = ubic + '¬'+jsonR[i].ubic;
         }
     }
+    
     indices = indices.slice(1); check = check.slice(1); obs = obs.slice(1); ubic = ubic.slice(1);
+    
     if (indices != null && check!=null && obs!=null && ubic!=null) {
         let v = when_construct(indices, check);
         let v2 = when_construct(indices, obs, indice_obs);
