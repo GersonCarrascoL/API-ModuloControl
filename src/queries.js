@@ -20,6 +20,7 @@ function SelectCollection(req, res, next, whereIN){
     "recaudaciones.fecha, " +
     "recaudaciones.id_ubicacion, " + 
     "recaudaciones.observacion_upg, " +
+    "recaudaciones.observacion, " +
     "ubicacion.descripcion as ubicacion, "+
     "tipo.descripcion as tipo, "+
     "CASE " +
