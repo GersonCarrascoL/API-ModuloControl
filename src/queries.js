@@ -24,12 +24,15 @@ function SelectCollection(req, res, next, whereIN){
     "ubicacion.descripcion as ubicacion, "+
     "tipo.descripcion as tipo, "+
     "CASE " +
-        "WHEN (select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) != alumno.codigo " +
-        "THEN (select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) " +
-        "WHEN NOT EXISTS(select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) " + 
-        "THEN alumno.codigo " + 
-        "WHEN (select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) = alumno.codigo " +
-        "THEN (select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) " +
+        "WHEN alumno_alumno_programa.cod_alumno IS NOT NULL "+
+        "THEN alumno_alumno_programa.cod_alumno "+
+        "ELSE alumno.codigo "+
+        // "WHEN (select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) != alumno.codigo " +
+        // "THEN (select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) " +
+        // "WHEN NOT EXISTS(select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) " + 
+        // "THEN alumno.codigo " + 
+        // "WHEN (select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) = alumno.codigo " +
+        // "THEN (select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) " +
     "END AS codigo, "+
     "alumno.ape_nom as Nombre " +
     "FROM recaudaciones " +
@@ -45,10 +48,9 @@ function SelectCollection(req, res, next, whereIN){
 
     db.any(query)
         .then(function(data){
-            data.forEach(element => {
-                element.importe = 'S/.'+numeral(element.importe).format('0,0.00');
-            });
-            
+            // data.forEach(element => {
+            //     element.importe = 'S/.'+numeral(element.importe).format('0,0.00');
+            // });
             res.status(200)
                 .json({
                     status : 'success',
