@@ -1,7 +1,8 @@
 let cn = require('../src/dbconnection');
 let db = cn.connection;
 const numeral = require('numeral');
-
+//Modificación en el query de la función SelectCollection para el retorno del DNI,
+//código, concepto de pago, número de recibo y observaciones_upg
 function SelectCollection(req, res, next, whereIN){
     let where = "WHERE "+whereIN;
     if (whereIN === "") where = "";
@@ -27,12 +28,6 @@ function SelectCollection(req, res, next, whereIN){
         "WHEN alumno_alumno_programa.cod_alumno IS NOT NULL "+
         "THEN alumno_alumno_programa.cod_alumno "+
         "ELSE alumno.codigo "+
-        // "WHEN (select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) != alumno.codigo " +
-        // "THEN (select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) " +
-        // "WHEN NOT EXISTS(select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) " + 
-        // "THEN alumno.codigo " + 
-        // "WHEN (select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) = alumno.codigo " +
-        // "THEN (select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) " +
     "END AS codigo, "+
     "alumno.ape_nom as Nombre " +
     "FROM recaudaciones " +
@@ -40,11 +35,12 @@ function SelectCollection(req, res, next, whereIN){
     "JOIN concepto ON recaudaciones.id_concepto = concepto.id_concepto " +
     "JOIN clase_pagos ON concepto.id_clase_pagos = clase_pagos.id_clase_pagos " +
     "INNER JOIN alumno_alumno_programa ON alumno_alumno_programa.id_alum = alumno.id_alum " +
-    "INNER JOIN alumno_programa ON alumno_programa.cod_alumno = alumno_alumno_programa.cod_alumno " +
+    "INNER JOIN alumno_programa ON (alumno_programa.cod_alumno = alumno_alumno_programa.cod_alumno " +
+	"AND alumno_programa.id_programa = alumno_alumno_programa.id_programa)" +	
     "LEFT JOIN ubicacion ON ubicacion.id_ubicacion = recaudaciones.id_ubicacion "+
     "LEFT JOIN tipo ON tipo.id_tipo = recaudaciones.id_tipo "+
         where +
-    " ORDER BY alumno.codigo DESC, fecha DESC; "
+    " ORDER BY alumno.codigo, concepto.concepto, fecha; "
 
     db.any(query)
         .then(function(data){
