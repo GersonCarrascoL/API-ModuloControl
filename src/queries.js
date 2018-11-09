@@ -84,7 +84,7 @@ function SelectGeneral(req, res, next, table){
 }
 function UpdateObservation(req,res,next,id,message){
     let query = 'UPDATE public.recaudaciones SET'+
-        ' observacion='+message+
+        ' observacion_upg='+message+
         ' WHERE id_rec='+id+';';
     console.log(query)
     db.any(query)
