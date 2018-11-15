@@ -28,12 +28,6 @@ function SelectCollection(req, res, next, whereIN){
         "WHEN alumno_alumno_programa.cod_alumno IS NOT NULL "+
         "THEN alumno_alumno_programa.cod_alumno "+
         "ELSE alumno.codigo "+
-        // "WHEN (select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) != alumno.codigo " +
-        // "THEN (select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) " +
-        // "WHEN NOT EXISTS(select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) " + 
-        // "THEN alumno.codigo " + 
-        // "WHEN (select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) = alumno.codigo " +
-        // "THEN (select a.cod_alumno from alumno_alumno_programa a where a.id_alum = alumno.id_alum) " +
     "END AS codigo, "+
     "alumno.ape_nom as Nombre " +
     "FROM recaudaciones " +
