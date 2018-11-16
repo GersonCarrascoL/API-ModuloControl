@@ -116,18 +116,27 @@ function UpdateQuery(req, res, next, when1, when2, when3, indices) {
 }
 function GetObservation(req,res,next,idObservacion){
     let query = `SELECT r.observacion_upg FROM recaudaciones as r WHERE r.id_rec=${idObservacion};`;
-
+    let obs_upg;
     db.any(query)
         .then(function(data){
+            
+            if (data.length == 0) {
+                obs_upg = [];
+            }else{
+                obs_upg = data[0]['observacion_upg'];
+            }
             res.status(200)
                 .json({
                     status : 'success',
-                    data:data[0]['observacion_upg'],
+                    data:obs_upg,
                     message : 'Get observarion succesfully'
                 });
         })
         .catch(function(err){
-            return next(err);
+            return res.status(500)
+                .json({
+                    status : 'error'
+                });
         });
 }
 function InsertQuery(req, res, next, valores){
