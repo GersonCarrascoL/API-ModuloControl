@@ -41,4 +41,7 @@ router.get('/tipos', algrmts.getAllTypes);
 /* GET Listar Ubicaciones */
 router.get('/ubicaciones', algrmts.getAllUbications);
 
+/* GET Obtener recibo */
+router.get('/recibo/:id', algrmts.getReceipt);
+
 module.exports = router;

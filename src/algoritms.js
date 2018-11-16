@@ -277,6 +277,10 @@ function getAllConcepts(req, res, next) {
 function getAllTypes(req, res, next) {
     q.SelectGeneral(req, res, next, "tipo");
 }
+function getReceipt(req,res,next){
+    let id = req.params.id;
+    q.GetReceipt(req,res,next,id);
+}
 function getAllUbications(req, res, next) {
     q.SelectGeneral(req, res, next, "ubicacion");
 }
@@ -293,6 +297,7 @@ module.exports = {
     insertNewCollection: insertNewCollection,
     getAllConcepts: getAllConcepts,
     getAllTypes: getAllTypes,
+    getReceipt: getReceipt,
     getAllUbications: getAllUbications,
     i_name: indice_name,
     i_concepto: indice_concepto,

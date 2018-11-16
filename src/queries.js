@@ -114,6 +114,30 @@ function UpdateQuery(req, res, next, when1, when2, when3, indices) {
             return next(err);
         })
 }
+function GetReceipt(req,res,next,idRecibo){
+    let query = `SELECT r.numero FROM recaudaciones as r WHERE r.numero='${idRecibo}'`;
+
+    console.log(query);
+    db.any(query)
+        .then(function(data){
+                
+            if (data.length == 0) {
+                recibo = 0;
+            }else{
+                recibo = 1;
+            }
+            res.status(200)
+                .json({
+                    response: recibo,
+                });
+        })
+        .catch(function(err){
+            return res.status(500)
+                .json({
+                    status : err.stack
+                });
+        });
+}
 function GetObservation(req,res,next,idObservacion){
     let query = `SELECT r.observacion_upg FROM recaudaciones as r WHERE r.id_rec=${idObservacion};`;
     let obs_upg;
@@ -164,5 +188,6 @@ module.exports = {
     UpdateObservation:UpdateObservation,
     GetObservation:GetObservation,
     UpdateQuery:UpdateQuery,
+    GetReceipt:GetReceipt,
     InsertQuery:InsertQuery
 };
