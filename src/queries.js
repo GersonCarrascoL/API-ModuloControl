@@ -114,7 +114,22 @@ function UpdateQuery(req, res, next, when1, when2, when3, indices) {
             return next(err);
         })
 }
+function GetObservation(req,res,next,idObservacion){
+    let query = `SELECT r.observacion_upg FROM recaudaciones as r WHERE r.id_rec=${idObservacion};`;
 
+    db.any(query)
+        .then(function(data){
+            res.status(200)
+                .json({
+                    status : 'success',
+                    data:data[0]['observacion_upg'],
+                    message : 'Get observarion succesfully'
+                });
+        })
+        .catch(function(err){
+            return next(err);
+        });
+}
 function InsertQuery(req, res, next, valores){
     let query=`insert into recaudaciones
     (id_alum, id_concepto, id_registro, id_ubicacion, cod_alumno, numero, importe, observacion, fecha, validado, id_tipo)
@@ -138,6 +153,7 @@ module.exports = {
     SelectGeneral:SelectGeneral,
     SelectCollection:SelectCollection,
     UpdateObservation:UpdateObservation,
+    GetObservation:GetObservation,
     UpdateQuery:UpdateQuery,
     InsertQuery:InsertQuery
 };

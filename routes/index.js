@@ -29,6 +29,9 @@ router.post('/recaudaciones/new/', algrmts.insertNewCollection);
 /* PUT Actualizar Observacion*/
 router.put('/recaudaciones/observaciones',algrmts.updateObservation);
 
+// GET Recaudacion
+router.get('/recaudaciones/observaciones/:id',algrmts.getObservation);
+
 /* GET Listar Conceptos */
 router.get('/conceptos', algrmts.getAllConcepts);
 

@@ -259,6 +259,10 @@ function updateObservation(req, res, next) {
         recaudation_message = "'" + req.body.mensaje + "'";
     q.UpdateObservation(req, res, next, idrecaudation, recaudation_message)
 }
+function getObservation(req,res,next){
+    let idRecaudacion = req.params.id;
+    q.GetObservation(req,res,next,idRecaudacion);
+}
 function insertNewCollection(req, res, next) {
     let jsonR = req.body;
     let va = "('" + jsonR.id_alum + "'," +
@@ -285,6 +289,7 @@ module.exports = {
     getComplet: getComplet,
     validate: validate,
     updateObservation: updateObservation,
+    getObservation:getObservation,
     insertNewCollection: insertNewCollection,
     getAllConcepts: getAllConcepts,
     getAllTypes: getAllTypes,
