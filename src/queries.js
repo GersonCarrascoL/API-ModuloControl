@@ -22,6 +22,8 @@ function SelectCollection(req, res, next, whereIN){
     "recaudaciones.observacion_upg, " +
     "recaudaciones.observacion, " +
     "recaudaciones.validado, " +
+    "moneda.moneda, " +
+    "moneda.mascara, " +
     "ubicacion.descripcion as ubicacion, "+
     "tipo.descripcion as tipo, "+
     "CASE " +
@@ -37,6 +39,7 @@ function SelectCollection(req, res, next, whereIN){
     "INNER JOIN alumno_alumno_programa ON alumno_alumno_programa.id_alum = alumno.id_alum " +
     "INNER JOIN alumno_programa ON alumno_programa.cod_alumno = alumno_alumno_programa.cod_alumno " +
     "LEFT JOIN ubicacion ON ubicacion.id_ubicacion = recaudaciones.id_ubicacion "+
+    "INNER JOIN moneda ON moneda.id_moneda = recaudaciones.moneda "+
     "LEFT JOIN tipo ON tipo.id_tipo = recaudaciones.id_tipo "+
         where +
     " ORDER BY alumno.codigo DESC, fecha DESC; "
