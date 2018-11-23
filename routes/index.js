@@ -38,6 +38,9 @@ router.get('/conceptos', algrmts.getAllConcepts);
 /* GET Listar Tipos */
 router.get('/tipos', algrmts.getAllTypes);
 
+/* GET Listar Moneda */
+router.get('/moneda', algrmts.getAllCoins);
+
 /* GET Listar Ubicaciones */
 router.get('/ubicaciones', algrmts.getAllUbications);
 

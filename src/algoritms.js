@@ -284,6 +284,9 @@ function getReceipt(req,res,next){
 function getAllUbications(req, res, next) {
     q.SelectGeneral(req, res, next, "ubicacion");
 }
+function getAllCoins(req, res, next){
+    q.SelectGeneral(req, res, next, "moneda");
+}
 function sumarDias(fecha, dias) {
     fecha.setDate(fecha.getDate() + dias);
     return fecha;
@@ -299,6 +302,7 @@ module.exports = {
     getAllTypes: getAllTypes,
     getReceipt: getReceipt,
     getAllUbications: getAllUbications,
+    getAllCoins: getAllCoins,
     i_name: indice_name,
     i_concepto: indice_concepto,
     i_voucher: indice_voucher,
