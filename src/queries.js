@@ -14,6 +14,7 @@ function SelectCollection(req, res, next, whereIN){
         "ELSE alumno.dni " +
     "END AS dni, " +
     "concepto.concepto as concepto, " +
+    "recaudaciones.id_alum as recibo, " + 
     "recaudaciones.numero as recibo, " + 
     "recaudaciones.id_rec, " +
     "recaudaciones.importe, " +
@@ -168,7 +169,7 @@ function GetObservation(req,res,next,idObservacion){
 }
 function InsertQuery(req, res, next, valores){
     let query=`insert into recaudaciones
-    (id_alum, id_concepto, id_registro, id_ubicacion, cod_alumno, numero, importe, observacion, fecha, validado, id_tipo)
+    (id_alum, id_concepto, id_registro, id_ubicacion, cod_alumno, numero, importe, observacion, fecha, validado, id_tipo, observacion_upg, moneda)
         values ${valores}`;
     console.log(query);
     db.any(query)
