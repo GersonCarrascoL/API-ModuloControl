@@ -1,6 +1,9 @@
 {
   "name": "api-modulocontrol",
   "version": "0.0.0",
+  "engines": {
+    "node": "8.12.0"
+  },
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www"
