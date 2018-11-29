@@ -268,7 +268,7 @@ function insertNewCollection(req, res, next) {
     let va = "('" + jsonR.id_alum + "'," +
         "'" + jsonR.id_concepto + "', '2103', '" + jsonR.id_ubicacion + "','" + jsonR.cod_alum + "'," +
         "'" + jsonR.numero + "','" + jsonR.importe + "','" + jsonR.observacion + "','" + jsonR.fecha + "'," +
-        jsonR.validado + ",'" + jsonR.tipo + "','"+ jsonR.observacion_upg +"','"+ jsonR.moneda+"')";
+        jsonR.validado + ",'" + jsonR.id_tipo + "','"+ jsonR.observacion_upg +"','"+ jsonR.moneda+"')";
     q.InsertQuery(req, res, next, va);
 }
 function getAllConcepts(req, res, next) {
