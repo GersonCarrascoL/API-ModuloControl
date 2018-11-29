@@ -182,7 +182,11 @@ function InsertQuery(req, res, next, valores){
                 });
         })
         .catch(function (err) {
-            return next(err);
+            res.status(500)
+            .json({
+                status : 'error',
+                message : err.stack
+            });
         })
 }
 
