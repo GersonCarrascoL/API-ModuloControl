@@ -14,7 +14,7 @@ function SelectCollection(req, res, next, whereIN){
         "ELSE alumno.dni " +
     "END AS dni, " +
     "concepto.concepto as concepto, " +
-    "recaudaciones.id_alum as recibo, " + 
+    "recaudaciones.id_alum, " + 
     "recaudaciones.numero as recibo, " + 
     "recaudaciones.id_rec, " +
     "recaudaciones.importe, " +
@@ -182,7 +182,11 @@ function InsertQuery(req, res, next, valores){
                 });
         })
         .catch(function (err) {
-            return next(err);
+            res.status(500)
+            .json({
+                status : 'error',
+                message : err.stack
+            });
         })
 }
 
