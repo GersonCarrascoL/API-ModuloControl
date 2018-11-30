@@ -33,8 +33,10 @@ function SelectCollection(req, res, next, whereIN){
         "ELSE alumno.codigo "+
     "END AS codigo, "+
     "alumno.ape_nom as Nombre " +
+    "programa.nom_programa " +
     "FROM recaudaciones " +
     "INNER JOIN alumno ON recaudaciones.id_alum = alumno.id_alum " + 
+    "LEFT JOIN programa ON recaudaciones.id_programa = programa.id_programa"
     "JOIN concepto ON recaudaciones.id_concepto = concepto.id_concepto " +
     "JOIN clase_pagos ON concepto.id_clase_pagos = clase_pagos.id_clase_pagos " +
     "INNER JOIN alumno_alumno_programa ON alumno_alumno_programa.id_alum = alumno.id_alum " +
@@ -58,7 +60,11 @@ function SelectCollection(req, res, next, whereIN){
                 });
         })
         .catch(function(err){
-            return next(err);
+            res.status(500)
+                .json({
+                    status : 'error',
+                    message : err.stack
+                });
         })
 }
 function SelectGeneral(req, res, next, table){
