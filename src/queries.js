@@ -25,6 +25,7 @@ function SelectCollection(req, res, next, whereIN){
     "recaudaciones.validado, " +
     "moneda.moneda, " +
     "moneda.mascara, " +
+    "programa.nom_programa as nombre_programa, " +
     "ubicacion.descripcion as ubicacion, "+
     "tipo.descripcion as tipo, "+
     "CASE " +
@@ -33,10 +34,9 @@ function SelectCollection(req, res, next, whereIN){
         "ELSE alumno.codigo "+
     "END AS codigo, "+
     "alumno.ape_nom as Nombre " +
-    // "programa.nom_programa as nombre_programa " +
     "FROM recaudaciones " +
     "INNER JOIN alumno ON recaudaciones.id_alum = alumno.id_alum " + 
-    // "LEFT JOIN programa ON recaudaciones.id_programa = programa.id_programa " +
+    "LEFT JOIN programa ON recaudaciones.id_programa = programa.id_programa " +
     "JOIN concepto ON recaudaciones.id_concepto = concepto.id_concepto " +
     "JOIN clase_pagos ON concepto.id_clase_pagos = clase_pagos.id_clase_pagos " +
     "INNER JOIN alumno_alumno_programa ON alumno_alumno_programa.id_alum = alumno.id_alum " +
